@@ -1,0 +1,42 @@
+import random
+
+def escolher_palavra():
+
+    palavras = [" ", "programação", "desenvolvimento", "inteligência", "artificial", "algoritimo", "estrutura", "dados"]
+    return random.choice(palavras)
+
+def ocultar_letras(palavra, porcentagem_oculta=0.5):
+    letras_ocultas = int(len(palavra) * porcentagem_oculta)
+    indices_ocultos = random.sample(range(len(palavra)), letras_ocultas)
+
+    palavra_oculta = list(palavra)
+    for indice in indices_ocultos:
+        palavra_oculta[indice] = '_'
+
+    return ''.join(palavra_oculta)
+
+def jogar_completar_palavras():
+    print("Bem-vindo ao Jogo de Complete as Palavras!")
+
+    palavra = escolher_palavra()
+    palavra_oculta = ocultar_letras(palavra)
+
+    tentativas = 0
+    while True:
+        print("\nPalavra: ", palavra_oculta)
+        tentativa = input("Digite a palavra completa ou 'sair' para encerrar o jogo: ").lower()
+
+        if tentativa == 'sair':
+            print(f"A palavra era: {palavra}. Obrigado por jogar! Adeus!")
+            break
+
+        if tentativa == palavra:
+            print("Parabéns! Você acertou!")
+            break
+        else:
+            print("Ops! Tente novamente.")
+
+        tentativas += 1
+
+if __name__ == "__main__":
+    jogar_completar_palavras()
